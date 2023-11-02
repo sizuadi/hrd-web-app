@@ -13,20 +13,13 @@
         type="image/png">
     <link rel="stylesheet" href="{{ asset('assets/compiled/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/compiled/css/app-dark.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/compiled/css/iconly.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/compiled/css/auth.css') }}" />
 </head>
 
 <body>
     <script src="{{ asset('assets/static/js/initTheme.js') }}"></script>
-    <div id="app">
-        <div id="sidebar">
-            <livewire:layouts.sidebar />
-        </div>
-        <div id="main" class='layout-navbar navbar-fixed'>
-            <livewire:layouts.header />
-            {{ $slot }}
-            <livewire:layouts.footer />
-        </div>
+    <div id="auth">
+        {{ $slot }}
     </div>
     <script src="{{ asset('assets/static/js/components/dark.js') }}"></script>
     <script src="{{ asset('assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
