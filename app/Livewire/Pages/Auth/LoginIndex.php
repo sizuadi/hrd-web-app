@@ -19,10 +19,10 @@ class LoginIndex extends Component
         $this->validate();
 
         if (Auth::attempt(['username' => $this->form->username, 'password' => $this->form->password])) {
-            return redirect()->route('dashboard');
+            $this->dispatch('toastify', $this->options("Login Berhasil"));
+            $this->redirect("/");
         } else {
-            $toastify = new Toastify([]);
-            $toastify->Success();
+            $this->dispatch('toastify', $this->options("Login Gagal"));
         }
     }
 

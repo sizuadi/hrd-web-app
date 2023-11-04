@@ -4,13 +4,14 @@
 <script src="{{ asset('assets/extensions/toastify-js/src/toastify.js') }}"></script>
 <script>
     window.addEventListener('toastify', event => {
+        let data = event.detail[0];
         Toastify({
-            text: event.detail.text,
-            duration: event.detail.text,
-            close: event.detail.close,
-            gravity: event.detail.gravity,
-            position: event.detail.position,
-            backgroundColor: event.detail.color,
+            text: data.text,
+            duration: data.text,
+            close: data.close,
+            gravity: data.gravity,
+            position: data.position,
+            backgroundColor: data.color,
         }).showToast();
     });
 </script>
