@@ -42,108 +42,30 @@
         </div>
         <div class="sidebar-menu">
             <ul class="menu">
-                <li class="sidebar-title">Menu</li>
+
 
                 <li class="sidebar-item active">
-                    <a href="index.html" class='sidebar-link'>
+                    <a href="/" wire:navigate class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
 
+                <li class="sidebar-title">Master Data</li>
+
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
-                        <span>Components</span>
+                        <span>User Management</span>
                     </a>
 
-                    <ul class="submenu ">
-
+                    <ul class="submenu">
                         <li class="submenu-item  ">
-                            <a href="component-accordion.html" class="submenu-link">Accordion</a>
-
+                            <a href="/user" wire:navigate class="submenu-link">User</a>
                         </li>
-
                         <li class="submenu-item  ">
-                            <a href="component-alert.html" class="submenu-link">Alert</a>
-
+                            <a href="#" class="submenu-link">Role</a>
                         </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-badge.html" class="submenu-link">Badge</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-breadcrumb.html" class="submenu-link">Breadcrumb</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-button.html" class="submenu-link">Button</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-card.html" class="submenu-link">Card</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-carousel.html" class="submenu-link">Carousel</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-collapse.html" class="submenu-link">Collapse</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-dropdown.html" class="submenu-link">Dropdown</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-list-group.html" class="submenu-link">List Group</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-modal.html" class="submenu-link">Modal</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-navs.html" class="submenu-link">Navs</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-pagination.html" class="submenu-link">Pagination</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-progress.html" class="submenu-link">Progress</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-spinner.html" class="submenu-link">Spinner</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-toasts.html" class="submenu-link">Toasts</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="component-tooltip.html" class="submenu-link">Tooltip</a>
-
-                        </li>
-
                     </ul>
 
 
@@ -235,7 +157,7 @@
 
                 </li>
 
-                <li class="sidebar-title">Forms &amp; Tables</li>
+                <li class="sidebar-title">Human Resources</li>
 
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
@@ -307,6 +229,7 @@
 
                 </li>
 
+                <li class="sidebar-title">Report</li>
             </ul>
         </div>
     </div>

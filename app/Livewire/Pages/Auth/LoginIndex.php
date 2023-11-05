@@ -8,6 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use App\Helpers\GlobalHelpers;
 
 #[Layout('livewire.layouts.app-auth')]
 class LoginIndex extends Component
@@ -19,10 +20,11 @@ class LoginIndex extends Component
         $this->validate();
 
         if (Auth::attempt(['username' => $this->form->username, 'password' => $this->form->password])) {
-            $this->dispatch('toastify', $this->options("Login Berhasil"));
             $this->redirect("/");
         } else {
-            $this->dispatch('toastify', $this->options("Login Gagal"));
+            $toastify = GlobalHelpers::toastifyWarning("Username dan password salah");
+            $this->dispatch(...$toastify);
+            GlobalHelpers::toastifyWarning("Username dan password tidak valid");
         }
     }
 

@@ -3871,7 +3871,7 @@ html[data-bs-theme="dark"] .input-group-text {
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 0.5;
     color: #526e8a;
     text-align: center;
     white-space: nowrap;

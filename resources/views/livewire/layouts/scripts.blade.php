@@ -12,6 +12,7 @@
             gravity: data.gravity,
             position: data.position,
             backgroundColor: data.color,
+            avatar: data.avatar,
         }).showToast();
     });
 </script>
