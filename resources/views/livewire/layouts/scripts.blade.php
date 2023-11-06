@@ -7,7 +7,7 @@
         let data = event.detail[0];
         Toastify({
             text: data.text,
-            duration: data.text,
+            duration: data.duration,
             close: data.close,
             gravity: data.gravity,
             position: data.position,

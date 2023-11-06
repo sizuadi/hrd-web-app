@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,14 +16,16 @@ class LoginAdminSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->insert(
+        $user = User::create(
             [
-                'full_name' => Str::random(10),
+                'full_name' => 'Administrator',
                 'email' => 'admin@atomic.id',
                 'username' => 'admin',
                 'rate_per_hour' => 0,
                 'password' => Hash::make('password'),
             ]
         );
+
+        $user->assignRole('admin');
     }
 }
