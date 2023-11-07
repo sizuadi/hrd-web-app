@@ -17,15 +17,16 @@
         </div>
         <section class="section">
             <div class="card">
-                <div class="card-header pb-0">
+                <div class="card-header pb-0 justify-content-end d-flex">
                     <a href="#" class="btn btn-primary">Create</a>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
                         <div class="justify-content-between align-items-center row">
-                            <div class="col-lg-3 col-md-4 col-sm-5 d-flex align-items-center">
+                            <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 d-flex align-items-center">
                                 <div>Show</div>
-                                <select class="form-select mx-1" id="basicSelect">
+                                <select class="form-select mx-1" wire:model.live="paginate">
+                                    <option>5</option>
                                     <option>10</option>
                                     <option>25</option>
                                     <option>50</option>
@@ -36,8 +37,8 @@
                             <div class="col-sm-4 mt-sm-0 mt-2">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
-                                    <input type="text" class="form-control" placeholder="Search" aria-label="Search"
-                                        aria-describedby="button-addon2">
+                                    <input type="text" class="form-control" placeholder="Search"
+                                        wire:model.live="query">
                                 </div>
                             </div>
                         </div>
@@ -45,57 +46,30 @@
                             <table class="table table-lg">
                                 <thead>
                                     <tr>
+                                        <th>#</th>
                                         <th>NAME</th>
-                                        <th>RATE</th>
-                                        <th>SKILL</th>
-                                        <th>SKILL</th>
-                                        <th>SKILL</th>
-                                        <th>SKILL</th>
+                                        <th>EMAIL</th>
+                                        <th>USERNAME</th>
+                                        <th>ROLE</th>
+                                        <th>STATUS</th>
+                                        <th>ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="text-bold-500">Michael Right</td>
-                                        <td>$15/hr</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">Morgan Vanblum</td>
-                                        <td>$13/hr</td>
-                                        <td class="text-bold-500">Graphic concepts</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">Tiffani Blogz</td>
-                                        <td>$15/hr</td>
-                                        <td class="text-bold-500">Animation</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">Ashley Boul</td>
-                                        <td>$15/hr</td>
-                                        <td class="text-bold-500">Animation</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-bold-500">Mikkey Mice</td>
-                                        <td>$15/hr</td>
-                                        <td class="text-bold-500">Animation</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                        <td class="text-bold-500">UI/UX</td>
-                                    </tr>
+                                    @foreach ($datas as $key => $data)
+                                        <tr>
+                                            <td class="text-bold-500">{{ $key + 1 }}</td>
+                                            <td class="text-bold-500">{{ $data->full_name }}</td>
+                                            <td>{{ $data->email }}</td>
+                                            <td class="text-bold-500">{{ $data->username }}</td>
+                                            <td class="text-bold-500">{{ $data->roles()->first()->name }}</td>
+                                            <td class="text-bold-500">{{ $data->status()->first()->name }}</td>
+                                            <td class="text-bold-500">test</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
+                            {{ $datas->links() }}
                         </div>
                         <div class="justify-content-between align-items-center row">
                             <div class="col-sm-6 d-flex align-items-center">
