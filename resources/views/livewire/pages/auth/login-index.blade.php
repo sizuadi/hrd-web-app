@@ -24,7 +24,7 @@
                             @enderror
 
                             <div
-                                class="form-group position-relative has-icon-left mt-4 @error('form.username') is-invalid @enderror">
+                                class="form-group position-relative has-icon-left mt-4 @error('form.password') is-invalid @enderror">
                                 <input type="password" class="form-control " placeholder="Password"
                                     wire:model="form.password" />
                                 <div class="form-control-icon">

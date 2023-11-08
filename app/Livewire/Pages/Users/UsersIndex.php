@@ -2,7 +2,10 @@
 
 namespace App\Livewire\Pages\Users;
 
+use App\Helpers\GlobalHelpers;
+use App\Livewire\Forms\Pages\Users\UsersStoreForm;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -12,25 +15,47 @@ class UsersIndex extends Component
 {
 
     use WithPagination;
-    protected $paginationTheme = 'bootstrap';
 
+    // init variable
+    protected $paginationTheme = 'bootstrap';
     public $search = "";
     public $currentPage = 1;
     public $paginate = 5;
     public $orderColumn = "id";
     public $sortOrder = "asc";
     public $sortIcon = "arrow-up";
+    public $mode = "";
+    public UsersStoreForm $form;
 
-    public function sorting($columnName = ""){
+    public function sorting($columnName = "")
+    {
         if ($this->sortOrder == "asc") {
             $this->sortOrder = "desc";
             $this->sortIcon = "arrow-down";
-        }else{
+        } else {
             $this->sortOrder = "asc";
             $this->sortIcon = "arrow-up";
         }
 
         $this->orderColumn = $columnName;
+    }
+
+    public function changeModalMode($mode = "")
+    {
+        $this->mode = $mode;
+    }
+
+    public function store()
+    {
+        $this->validate();
+
+        $this->form->password = Hash::make($this->form->password);
+        // dd((array)$this->form);
+        $user = User::create((array)$this->form);
+        $user->assignRole("admin");
+
+        $toastify = GlobalHelpers::toastifySuccess("User Berhasil Dibuat");
+        $this->dispatch(...$toastify);
     }
 
     public function render()

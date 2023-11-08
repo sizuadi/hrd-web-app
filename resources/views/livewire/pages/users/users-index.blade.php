@@ -18,7 +18,9 @@
         <section class="section">
             <div class="card">
                 <div class="card-header pb-0 justify-content-between d-flex">
-                    <a href="#" class="btn btn-primary">Create</a>
+                    <button data-bs-toggle="modal" data-bs-target="#modal-form" type="button" class="btn btn-primary"
+                        wire:click="changeModalMode('create')">Create
+                    </button>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
@@ -141,4 +143,5 @@
             </div>
         </section>
     </div>
+    @include('livewire.pages.users.partials.modal-form')
 </div>
