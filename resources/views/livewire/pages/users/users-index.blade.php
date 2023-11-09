@@ -62,6 +62,7 @@
                                                 @endif
                                             </div>
                                         </th>
+                                        <th></th>
                                         <th>
                                             <div class="d-flex align-items-center @if ($orderColumn == 'full_name') text-primary @endif"
                                                 wire:click="sorting('full_name')" role="button">
@@ -115,21 +116,43 @@
                                             </div>
                                         </th>
                                         <th>STATUS</th>
-                                        <th>ACTION</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($datas as $key => $data)
                                         <tr>
                                             <td class="text-bold-500">{{ $datas->firstItem() + $key }}</td>
+                                            <td class="text-bold-500">
+                                                <a href="#" class="btn icon btn-md btn-outline-info"
+                                                    title="edit">
+                                                    <i class="bi bi-pencil">
+                                                        <div></div>
+                                                    </i>
+                                                </a>
+                                                <a href="#" class="btn icon btn-md btn-outline-info"
+                                                    title="show">
+                                                    <i class="bi bi-eye">
+                                                        <div></div>
+                                                    </i>
+                                                </a>
+                                                <div class="dropdown d-inline-block">
+                                                    <button type="button" class="btn icon btn-md btn-outline-info"
+                                                        data-bs-toggle="dropdown" title="show">
+                                                        <i class="bi bi-three-dots-vertical">
+                                                        </i>
+                                                    </button>
+                                                    <div class="dropdown-menu" style="">
+                                                        <a class="dropdown-item" href="#">Option 1</a>
+                                                        <a class="dropdown-item" href="#">Option 2</a>
+                                                        <a class="dropdown-item" href="#">Option 3</a>
+                                                    </div>
+                                                </div>
+                                            </td>
                                             <td class="text-bold-500">{{ $data->full_name }}</td>
                                             <td>{{ $data->email }}</td>
                                             <td class="text-bold-500">{{ $data->username }}</td>
                                             <td class="text-bold-500">{{ $data->roles()->first()->name }}</td>
                                             <td class="text-bold-500">{{ $data->status()->first()->name }}</td>
-                                            <td class="text-bold-500">
-                                                <a href="#" class="btn btn-success">Edit</a>
-                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

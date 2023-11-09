@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" wire:click.prevent="cancel" class="btn btn-light-primary"
+                        <button type="button" wire:click.prevent="resetForm" class="btn btn-light-primary"
                             data-bs-dismiss="modal">
                             <i class="bx bx-x d-block d-sm-none"></i>
                             <span class="d-none d-sm-block">Close</span>

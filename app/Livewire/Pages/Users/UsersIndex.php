@@ -45,12 +45,21 @@ class UsersIndex extends Component
         $this->mode = $mode;
     }
 
+    public function resetForm()
+    {
+        $this->form->full_name = "";
+        $this->form->username = "";
+        $this->form->password = "";
+        $this->form->password_confirmation = "";
+        $this->form->email = "";
+        $this->form->rate_per_hour = "";
+    }
+
     public function store()
     {
         $this->validate();
 
-        $this->form->password = Hash::make($this->form->password);
-        // dd((array)$this->form);
+        $this->form->password = Hash::make($this->form->password);;
         $user = User::create((array)$this->form);
         $user->assignRole("admin");
 
