@@ -142,8 +142,9 @@
                                                             <div></div>
                                                         </i>
                                                     </button>
-                                                    <a href="#" class="btn icon btn-md btn-outline-info"
-                                                        title="show">
+                                                    <a wire:click="changeModalMode('show', {{ $data->id }})"
+                                                        data-bs-toggle="modal" data-bs-target="#modal-form"
+                                                        class="btn icon btn-md btn-outline-info" title="show">
                                                         <i class="bi bi-eye">
                                                             <div></div>
                                                         </i>
@@ -157,10 +158,13 @@
                                                         <div class="dropdown-menu">
                                                             <span class="ms-3 text-bold-500">Change Status</span>
                                                             @foreach ($statuses as $status)
-                                                                <button class="dropdown-item" data-bs-toggle="modal"
-                                                                    data-bs-target="#modal-change-status"
-                                                                    type="button"
-                                                                    wire:click="modalStatus({{ $data->id }}, {{ $data->status_id }}, '{{ $data->status()->first()->name }}')">{{ $status->name }}</button>
+                                                                @if ($status->id != $data->status_id)
+                                                                    <button class="dropdown-item"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#modal-change-status"
+                                                                        type="button"
+                                                                        wire:click="modalStatus({{ $data->id }}, {{ $status->id }}, '{{ $status->name }}')">{{ $status->name }}</button>
+                                                                @endif
                                                             @endforeach
                                                         </div>
                                                     </div>
@@ -170,7 +174,24 @@
                                             <td>{{ $data->email }}</td>
                                             <td class="text-bold-500">{{ $data->username }}</td>
                                             <td class="text-bold-500">{{ $data->roles()->first()->name }}</td>
-                                            <td class="text-bold-500">{{ $data->status()->first()->name }}</td>
+                                            <td class="text-bold-500">
+                                                @php
+                                                    $classStatus = '';
+                                                    switch ($data->status_id) {
+                                                        case 0:
+                                                            $classStatus = 'bg-light-secondary';
+                                                            break;
+                                                        case 1:
+                                                            $classStatus = 'bg-light-success';
+                                                            break;
+                                                        default:
+                                                            $classStatus = 'bg-light-dark';
+                                                            break;
+                                                    }
+                                                @endphp
+                                                <span
+                                                    class="badge {{ $classStatus }}">{{ $data->status()->first()->name }}</span>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

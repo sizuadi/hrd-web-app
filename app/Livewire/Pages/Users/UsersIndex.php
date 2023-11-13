@@ -50,15 +50,18 @@ class UsersIndex extends Component
     public function changeModalMode($mode = "", $id = 0)
     {
         $this->mode = $mode;
-        if ($id != 0 && $mode == "update") {
+        if ($id != 0 && ($mode == "update" || $mode == "show")) {
             $user = User::find($id);
             $this->form->id = $user->id;
             $this->form->full_name = $user->full_name;
             $this->form->username = $user->username;
             $this->form->email = $user->email;
             $this->form->rate_per_hour = $user->rate_per_hour;
+            $this->form->role = $user->roles()->first()->name;
         }
-        $this->dispatch("choices");
+        if ($mode != "show") {
+            $this->dispatch("choices");
+        }
     }
 
     public function resetForm()
@@ -87,10 +90,15 @@ class UsersIndex extends Component
 
     public function update()
     {
-        $this->validate();
+        $this->validate([
+            'form.password' => "nullable|confirmed",
+            'form.password_confirmation' => "nullable",
+        ]);
 
         $user = User::find($this->form->id);
-        $user->password = Hash::make($this->form->password);
+        if ($this->form->password != "") {
+            $user->password = Hash::make($this->form->password);
+        }
         $user->update((array)$this->form);
         $user->assignRole($this->form->role);
 
@@ -98,6 +106,17 @@ class UsersIndex extends Component
         $this->dispatch(...$toastify);
         $this->dispatch("closeModal");
         $this->resetForm();
+    }
+
+    public function updateStatus()
+    {
+        $user = User::find($this->user->id);
+        $user->update([
+            'status_id' => $this->status_id
+        ]);
+        $toastify = GlobalHelpers::toastifySuccess("Status User Berhasil Diupdate");
+        $this->dispatch(...$toastify);
+        $this->dispatch("closeModal");
     }
 
     public function modalStatus(int $id, int $status_id, string $status_name)

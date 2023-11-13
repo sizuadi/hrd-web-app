@@ -13,14 +13,13 @@
                 <form>
                     <div class="modal-body">
                         <p>Apakah anda yakin mengganti status data ini menjadi {{ $status_name }}</p>
-                        <input type="hidden" wire:model="id">
                         <input type="hidden" wire:model="status_id">
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light-primary" data-bs-dismiss="modal">
                                 <i class="bx bx-x d-block d-sm-none"></i>
                                 <span class="d-none d-sm-block">Close</span>
                             </button>
-                            <button type="button" class="btn btn-primary ms-1">
+                            <button type="button" class="btn btn-primary ms-1" wire:click.prevent="updateStatus">
                                 <i class="bx bx-check d-block d-sm-none"></i>
                                 <span class="d-none d-sm-block">Submit</span>
                             </button>
