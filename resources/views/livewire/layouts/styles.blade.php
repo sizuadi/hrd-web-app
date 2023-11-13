@@ -8,3 +8,5 @@
 <link rel="stylesheet" href="{{ asset('assets/compiled/css/auth.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/compiled/css/iconly.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/extensions/@fortawesome/fontawesome-free/css/all.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/extensions/choices.js/public/assets/styles/choices.css') }}">
+@stack('add-styles')

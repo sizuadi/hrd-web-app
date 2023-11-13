@@ -1,17 +1,18 @@
 <div>
     <div wire:ignore.self class="modal fade text-left modal-borderless" id="modal-form" tabindex="-1" role="dialog"
-        aria-labelledby="myModalLabel1" aria-hidden="true">
+        aria-labelledby="myModalLabel1" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ $mode == 'edit' ? 'Edit' : 'Create' }} User</h5>
-                    <button type="button" class="close rounded-pill" data-bs-dismiss="modal" wire:ignore
-                        aria-label="Close">
+                    <h5 class="modal-title">{{ $mode == 'update' ? 'Edit' : 'Create' }} User</h5>
+                    <button type="button" class="close rounded-pill" wire:click="resetForm" data-bs-dismiss="modal"
+                        wire:ignore aria-label="Close">
                         <i data-feather="x"></i>
                     </button>
                 </div>
                 <form>
                     <div class="modal-body">
+                        <input type="hidden" wire:model="form.id">
                         <div class="row">
                             <div class="col-sm-6">
                                 <label for="full_name">Full Name</label>
@@ -83,14 +84,34 @@
                                 @enderror
                             </div>
                         </div>
+                        <div class="row
+                                        mt-4">
+                            <div class="col-sm-6">
+                                <label for="role">Role</label>
+                                <div class="form-group">
+                                    <select class="choices form-select @error('form.role') is-invalid @enderror"
+                                        id="role" wire:model="form.role" wire:ignore>
+                                        <option value="">Select an option</option>
+                                        @foreach ($roles as $role)
+                                            <option value="{{ $role->name }}">{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('form.role')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" wire:click.prevent="resetForm" class="btn btn-light-primary"
-                            data-bs-dismiss="modal">
+                            data-bs-dismiss="modal" class="btn btn-light-primary">
                             <i class="bx bx-x d-block d-sm-none"></i>
                             <span class="d-none d-sm-block">Close</span>
                         </button>
-                        <button type="button" wire:click.prevent="{{ $mode == 'edit' ? 'update' : 'store' }}"
+                        <button type="button" wire:click.prevent="{{ $mode == 'update' ? 'update' : 'store' }}"
                             class="btn btn-primary ms-1">
                             <i class="bx bx-check d-block d-sm-none"></i>
                             <span class="d-none d-sm-block">Submit</span>
@@ -101,3 +122,6 @@
         </div>
     </div>
 </div>
+
+@push('add-scripts')
+@endpush

@@ -17,10 +17,21 @@
         </div>
         <section class="section">
             <div class="card">
-                <div class="card-header pb-0 justify-content-between d-flex">
-                    <button data-bs-toggle="modal" data-bs-target="#modal-form" type="button" class="btn btn-primary"
-                        wire:click="changeModalMode('create')">Create
-                    </button>
+                <div class="card-header pb-0 justify-content-between d-flex align-items-center">
+                    <div class="form-group">
+                        <label for="">Status</label>
+                        <select class="form-select" wire:model.live='status'>
+                            <option value="">All</option>
+                            @foreach ($statuses as $status)
+                                <option value="{{ $status->id }}">{{ $status->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group mb-0">
+                        <button data-bs-toggle="modal" data-bs-target="#modal-form" type="button"
+                            class="btn btn-primary" wire:click="changeModalMode('create')">Create
+                        </button>
+                    </div>
                 </div>
                 <div class="card-content">
                     <div class="card-body">
@@ -123,28 +134,35 @@
                                         <tr>
                                             <td class="text-bold-500">{{ $datas->firstItem() + $key }}</td>
                                             <td class="text-bold-500">
-                                                <a href="#" class="btn icon btn-md btn-outline-info"
-                                                    title="edit">
-                                                    <i class="bi bi-pencil">
-                                                        <div></div>
-                                                    </i>
-                                                </a>
-                                                <a href="#" class="btn icon btn-md btn-outline-info"
-                                                    title="show">
-                                                    <i class="bi bi-eye">
-                                                        <div></div>
-                                                    </i>
-                                                </a>
-                                                <div class="dropdown d-inline-block">
-                                                    <button type="button" class="btn icon btn-md btn-outline-info"
-                                                        data-bs-toggle="dropdown" title="show">
-                                                        <i class="bi bi-three-dots-vertical">
+                                                <div class="d-flex">
+                                                    <button wire:click="changeModalMode('update', {{ $data->id }})"
+                                                        data-bs-toggle="modal" data-bs-target="#modal-form"
+                                                        class="btn icon btn-md btn-outline-info" title="edit">
+                                                        <i class="bi bi-pencil">
+                                                            <div></div>
                                                         </i>
                                                     </button>
-                                                    <div class="dropdown-menu" style="">
-                                                        <a class="dropdown-item" href="#">Option 1</a>
-                                                        <a class="dropdown-item" href="#">Option 2</a>
-                                                        <a class="dropdown-item" href="#">Option 3</a>
+                                                    <a href="#" class="btn icon btn-md btn-outline-info"
+                                                        title="show">
+                                                        <i class="bi bi-eye">
+                                                            <div></div>
+                                                        </i>
+                                                    </a>
+                                                    <div class="dropdown d-inline-block">
+                                                        <button type="button" class="btn icon btn-md btn-outline-info"
+                                                            data-bs-toggle="dropdown" title="show">
+                                                            <i class="bi bi-three-dots-vertical">
+                                                            </i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <span class="ms-3 text-bold-500">Change Status</span>
+                                                            @foreach ($statuses as $status)
+                                                                <button class="dropdown-item" data-bs-toggle="modal"
+                                                                    data-bs-target="#modal-change-status"
+                                                                    type="button"
+                                                                    wire:click="modalStatus({{ $data->id }}, {{ $data->status_id }}, '{{ $data->status()->first()->name }}')">{{ $status->name }}</button>
+                                                            @endforeach
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
@@ -167,4 +185,5 @@
         </section>
     </div>
     @include('livewire.pages.users.partials.modal-form')
+    @include('livewire.pages.users.partials.modal-change-status')
 </div>
