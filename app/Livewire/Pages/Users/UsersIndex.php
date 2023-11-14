@@ -3,7 +3,7 @@
 namespace App\Livewire\Pages\Users;
 
 use App\Helpers\GlobalHelpers;
-use App\Livewire\Forms\Pages\Users\UsersStoreForm;
+use App\Livewire\Forms\Pages\Users\UsersForm;
 use App\Models\User;
 use App\Models\UserStatus;
 use Illuminate\Support\Facades\Hash;
@@ -30,7 +30,7 @@ class UsersIndex extends Component
     public $mode = "";
 
     // for create
-    public UsersStoreForm $form;
+    public UsersForm $form;
 
     public $status_id, $status_name, $user;
 

@@ -18,5 +18,6 @@ Route::middleware(['guest'])->group(function () {
 });
 Route::middleware(['auth'])->group(function () {
     Route::get('/', App\Livewire\Pages\Dashboard\DashboardIndex::class)->name('dashboard');
-    Route::get('/user', App\Livewire\Pages\Users\UsersIndex::class)->name('user');
+    Route::get('/users', App\Livewire\Pages\Users\UsersIndex::class)->name('users');
+    Route::get('/roles', App\Livewire\Pages\Roles\RolesIndex::class)->name('roles');
 });

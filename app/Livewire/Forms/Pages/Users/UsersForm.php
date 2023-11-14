@@ -5,7 +5,7 @@ namespace App\Livewire\Forms\Pages\Users;
 use Livewire\Attributes\Rule;
 use Livewire\Form;
 
-class UsersStoreForm extends Form
+class UsersForm extends Form
 {
     #[Rule('nullable')]
     public $id = '';

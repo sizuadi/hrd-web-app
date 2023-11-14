@@ -3,7 +3,7 @@
 namespace App\Livewire\Pages\Roles;
 
 use App\Helpers\GlobalHelpers;
-use App\Livewire\Forms\Pages\Roles\RolesStoreForm;
+use App\Livewire\Forms\Pages\Roles\RolesForm;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
@@ -28,7 +28,7 @@ class RolesIndex extends Component
     public $mode = "";
 
     // for create
-    public RolesStoreForm $form;
+    public RolesForm $form;
 
     public $status_id, $status_name, $role;
 
@@ -51,11 +51,7 @@ class RolesIndex extends Component
         if ($id != 0 && ($mode == "update" || $mode == "show")) {
             $role = Role::find($id);
             $this->form->id = $role->id;
-            $this->form->full_name = $role->full_name;
-            $this->form->rolename = $role->rolename;
-            $this->form->email = $role->email;
-            $this->form->rate_per_hour = $role->rate_per_hour;
-            $this->form->role = $role->roles()->first()->name;
+            $this->form->name = $role->name;
         }
         if ($mode != "show") {
             $this->dispatch("choices");
@@ -64,21 +60,13 @@ class RolesIndex extends Component
 
     public function resetForm()
     {
-        $this->form->full_name = "";
-        $this->form->rolename = "";
-        $this->form->password = "";
-        $this->form->password_confirmation = "";
-        $this->form->email = "";
-        $this->form->rate_per_hour = "";
+        $this->form->name = "";
     }
 
     public function store()
     {
         $this->validate();
-
-        $this->form->password = Hash::make($this->form->password);;
-        $role = Role::create((array)$this->form);
-        $role->assignRole($this->form->role);
+        Role::create((array)$this->form);
 
         $toastify = GlobalHelpers::toastifySuccess("Role Berhasil Dibuat");
         $this->dispatch(...$toastify);
@@ -88,40 +76,15 @@ class RolesIndex extends Component
 
     public function update()
     {
-        $this->validate([
-            'form.password' => "nullable|confirmed",
-            'form.password_confirmation' => "nullable",
-        ]);
+        $this->validate();
 
         $role = Role::find($this->form->id);
-        if ($this->form->password != "") {
-            $role->password = Hash::make($this->form->password);
-        }
         $role->update((array)$this->form);
-        $role->assignRole($this->form->role);
 
         $toastify = GlobalHelpers::toastifySuccess("Role Berhasil Diupdate");
         $this->dispatch(...$toastify);
         $this->dispatch("closeModal");
         $this->resetForm();
-    }
-
-    public function updateStatus()
-    {
-        $role = Role::find($this->role->id);
-        $role->update([
-            'status_id' => $this->status_id
-        ]);
-        $toastify = GlobalHelpers::toastifySuccess("Status Role Berhasil Diupdate");
-        $this->dispatch(...$toastify);
-        $this->dispatch("closeModal");
-    }
-
-    public function modalStatus(int $id, int $status_id, string $status_name)
-    {
-        $this->role = Role::find($id);
-        $this->status_id = $status_id;
-        $this->status_name = $status_name;
     }
 
     public function render()
@@ -140,12 +103,10 @@ class RolesIndex extends Component
 
         $datas = $datas->orderBy($this->orderColumn, $this->sortOrder)->paginate($this->paginate);
         $roles = Role::orderBy("id", "desc")->get();
-        $statuses = RoleStatus::orderBy("id", "desc")->get();
 
         return view('livewire.pages.roles.roles-index', [
             'datas' => $datas,
             'roles' => $roles,
-            'statuses' => $statuses,
         ]);
     }
 

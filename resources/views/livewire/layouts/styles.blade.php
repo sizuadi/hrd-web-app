@@ -9,4 +9,15 @@
 <link rel="stylesheet" href="{{ asset('assets/compiled/css/iconly.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/extensions/@fortawesome/fontawesome-free/css/all.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/extensions/choices.js/public/assets/styles/choices.css') }}">
+<style>
+    .modal-backdrop.fade {
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+
+    .modal-backdrop.fade.in {
+        opacity: 0.5;
+        filter: alpha(opacity=50);
+    }
+</style>
 @stack('add-styles')

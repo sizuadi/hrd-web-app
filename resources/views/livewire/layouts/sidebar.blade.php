@@ -44,7 +44,7 @@
             <ul class="menu">
 
 
-                <li class="sidebar-item active">
+                <li class="sidebar-item {{ Route::is('dashboard') ? 'active' : '' }}">
                     <a href="/" wire:navigate class='sidebar-link'>
                         <i class="bi bi-grid-fill"></i>
                         <span>Dashboard</span>
@@ -53,18 +53,18 @@
 
                 <li class="sidebar-title">Master Data</li>
 
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item {{ Route::is('users') || Route::is('roles') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
                         <span>User Management</span>
                     </a>
 
                     <ul class="submenu">
-                        <li class="submenu-item  ">
-                            <a href="/user" wire:navigate class="submenu-link">User</a>
+                        <li class="submenu-item {{ Route::is('users') ? 'active' : '' }}">
+                            <a href="/users" wire:navigate class="submenu-link">User</a>
                         </li>
-                        <li class="submenu-item  ">
-                            <a href="#" class="submenu-link">Role</a>
+                        <li class="submenu-item {{ Route::is('roles') ? 'active' : '' }}">
+                            <a href="/roles" wire:navigate class="submenu-link">Role</a>
                         </li>
                     </ul>
 
