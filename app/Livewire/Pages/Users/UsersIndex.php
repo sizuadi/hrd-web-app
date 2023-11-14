@@ -98,6 +98,8 @@ class UsersIndex extends Component
         $user = User::find($this->form->id);
         if ($this->form->password != "") {
             $user->password = Hash::make($this->form->password);
+        } else {
+            $this->form->password = $user->password;
         }
         $user->update((array)$this->form);
         $user->assignRole($this->form->role);

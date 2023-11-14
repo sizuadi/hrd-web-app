@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 #[Layout('livewire.layouts.app')]
@@ -30,7 +31,7 @@ class RolesIndex extends Component
     // for create
     public RolesForm $form;
 
-    public $status_id, $status_name, $role;
+    public $checked_permissions = [], $custom_permissions = [], $checkedAll = false;
 
     public function sorting($columnName = "")
     {
@@ -49,7 +50,17 @@ class RolesIndex extends Component
     {
         $this->mode = $mode;
         if ($id != 0 && ($mode == "update" || $mode == "show")) {
+            \DB::statement("SET SQL_MODE=''");
+            $role_permission = Permission::select('name', 'id')->groupBy('name')->get();
+            foreach ($role_permission as $per) {
+                $key = substr($per->name, 0, strpos($per->name, "."));
+                if (str_starts_with($per->name, $key)) {
+                    $this->custom_permissions[$key][] = $per;
+                }
+            }
             $role = Role::find($id);
+            $this->checked_permissions = $role->getPermissionNames()->toArray();
+            $this->checkedAll = count($this->checked_permissions) == count($role_permission);
             $this->form->id = $role->id;
             $this->form->name = $role->name;
         }
@@ -61,13 +72,16 @@ class RolesIndex extends Component
     public function resetForm()
     {
         $this->form->name = "";
+        $this->custom_permissions = [];
+        $this->checked_permissions = [];
+        $this->checkedAll = false;
     }
 
     public function store()
     {
         $this->validate();
-        Role::create((array)$this->form);
-
+        $role = Role::create((array)$this->form);
+        $role->syncPermissions($this->checked_permissions);
         $toastify = GlobalHelpers::toastifySuccess("Role Berhasil Dibuat");
         $this->dispatch(...$toastify);
         $this->dispatch("closeModal");
@@ -80,6 +94,7 @@ class RolesIndex extends Component
 
         $role = Role::find($this->form->id);
         $role->update((array)$this->form);
+        $role->syncPermissions($this->checked_permissions);
 
         $toastify = GlobalHelpers::toastifySuccess("Role Berhasil Diupdate");
         $this->dispatch(...$toastify);
@@ -108,6 +123,17 @@ class RolesIndex extends Component
             'datas' => $datas,
             'roles' => $roles,
         ]);
+    }
+
+    public function updatedCheckedAll($value)
+    {
+        \DB::statement("SET SQL_MODE=''");
+        if ($value) {
+            $this->checked_permissions = Permission::pluck("name")->toArray();
+        } else {
+            $this->checked_permissions = [];
+        }
+        // dd($this);
     }
 
     public function updatingSearch()

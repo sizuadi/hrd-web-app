@@ -16,14 +16,52 @@
                             <input type="hidden" wire:model="form.id">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <label for="name">Name</label>
-                                    <input type="text" class="form-control @error('form.name') is-invalid @enderror"
-                                        id="name" wire:model="form.name" placeholder="Name">
-                                    @error('form.name')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
+                                    <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text"
+                                            class="form-control @error('form.name') is-invalid @enderror" id="name"
+                                            wire:model="form.name" placeholder="Name">
+                                        @error('form.name')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body px-0">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label>Permission</label>
+                                            <div class="form-check form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" id="checkbox-all-permisssion"
+                                                        class="form-check-input" wire:model.live="checkedAll">
+                                                    <label for="checkbox-all-permisssion">Check All</label>
+                                                </div>
+                                            </div>
                                         </div>
-                                    @enderror
+                                    </div>
+                                    <div class="row">
+                                        @foreach ($custom_permissions as $key => $custom_permission)
+                                            <div class="col-sm-6 form-group">
+                                                <label>{{ ucwords($key) }}</label>
+                                                @foreach ($custom_permission as $permission)
+                                                    <div class="form-check">
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" id="checkbox{{ $permission->id }}"
+                                                                class="form-check-input checkbox-permission"
+                                                                wire:model.live="checked_permissions"
+                                                                value="{{ $permission->name }}">
+                                                            <label
+                                                                for="checkbox{{ $permission->id }}">{{ $permission->name }}</label>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         @else
