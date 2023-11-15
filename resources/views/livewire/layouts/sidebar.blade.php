@@ -51,12 +51,12 @@
                     </a>
                 </li>
 
-                <li class="sidebar-title">Master Data</li>
+                <li class="sidebar-title">Data Master</li>
 
                 <li class="sidebar-item {{ Route::is('users') || Route::is('roles') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-stack"></i>
-                        <span>User Management</span>
+                        <span>Manajemen User</span>
                     </a>
 
                     <ul class="submenu">
@@ -74,44 +74,23 @@
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-collection-fill"></i>
-                        <span>Extra Components</span>
+                        <span>Proyek</span>
                     </a>
 
                     <ul class="submenu ">
 
-                        <li class="submenu-item  ">
-                            <a href="extra-component-avatar.html" class="submenu-link">Avatar</a>
+                        <li class="submenu-item">
+                            <a href="extra-component-avatar.html" class="submenu-link">Proyek</a>
 
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="extra-component-comment.html" class="submenu-link">Comment</a>
+                            <a href="extra-component-comment.html" class="submenu-link">Perusahaan</a>
 
                         </li>
 
                         <li class="submenu-item  ">
-                            <a href="extra-component-divider.html" class="submenu-link">Divider</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="extra-component-date-picker.html" class="submenu-link">Date Picker</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="extra-component-sweetalert.html" class="submenu-link">Sweet Alert</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="extra-component-toastify.html" class="submenu-link">Toastify</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="extra-component-rating.html" class="submenu-link">Rating</a>
-
+                            <a href="extra-component-divider.html" class="submenu-link">Tipe Pekerjaan</a>
                         </li>
 
                     </ul>
@@ -122,36 +101,13 @@
                 <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-grid-1x2-fill"></i>
-                        <span>Layouts</span>
+                        <span>Arsip</span>
                     </a>
 
                     <ul class="submenu">
-
                         <li class="submenu-item  ">
-                            <a href="layout-default.html" class="submenu-link">Default Layout</a>
-
+                            <a href="layout-default.html" class="submenu-link">Kategori</a>
                         </li>
-
-                        <li class="submenu-item  ">
-                            <a href="layout-vertical-1-column.html" class="submenu-link">1 Column</a>
-
-                        </li>
-
-                        <li class="submenu-item">
-                            <a href="layout-vertical-navbar.html" class="submenu-link">Vertical Navbar</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="layout-rtl.html" class="submenu-link">RTL Layout</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="layout-horizontal.html" class="submenu-link">Horizontal Menu</a>
-
-                        </li>
-
                     </ul>
 
 
@@ -159,77 +115,48 @@
 
                 <li class="sidebar-title">Human Resources</li>
 
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-hexagon-fill"></i>
-                        <span>Form Elements</span>
+                        <span>Work Report</span>
                     </a>
-
-                    <ul class="submenu ">
-
-                        <li class="submenu-item  ">
-                            <a href="form-element-input.html" class="submenu-link">Input</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="form-element-input-group.html" class="submenu-link">Input Group</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="form-element-select.html" class="submenu-link">Select</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="form-element-radio.html" class="submenu-link">Radio</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="form-element-checkbox.html" class="submenu-link">Checkbox</a>
-
-                        </li>
-
-                        <li class="submenu-item  ">
-                            <a href="form-element-textarea.html" class="submenu-link">Textarea</a>
-
-                        </li>
-
-                    </ul>
-
-
                 </li>
 
-                <li class="sidebar-item  ">
+                <li class="sidebar-item">
                     <a href="form-layout.html" class='sidebar-link'>
                         <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Form Layout</span>
+                        <span>Arsip Masuk</span>
                     </a>
-
-
                 </li>
 
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-journal-check"></i>
-                        <span>Form Validation</span>
+                        <span>Arsip Keluar</span>
                     </a>
-
-                    <ul class="submenu ">
-
-                        <li class="submenu-item  ">
-                            <a href="form-validation-parsley.html" class="submenu-link">Parsley</a>
-
-                        </li>
-
-                    </ul>
-
-
                 </li>
 
                 <li class="sidebar-title">Report</li>
+                <li class="sidebar-item">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-hexagon-fill"></i>
+                        <span>Work Report</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="form-layout.html" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-medical-fill"></i>
+                        <span>Arsip Masuk</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="#" class='sidebar-link'>
+                        <i class="bi bi-journal-check"></i>
+                        <span>Arsip Keluar</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

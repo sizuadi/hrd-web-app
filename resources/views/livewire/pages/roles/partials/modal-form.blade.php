@@ -72,6 +72,41 @@
                                         placeholder="Name" disabled>
                                 </div>
                             </div>
+                            <div class="card">
+                                <div class="card-body px-0">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <label>Permission</label>
+                                            <div class="form-check form-group">
+                                                <div class="checkbox">
+                                                    <input type="checkbox" id="checkbox-all-permisssion"
+                                                        class="form-check-input" wire:model.live="checkedAll" disabled>
+                                                    <label for="checkbox-all-permisssion">Check All</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        @foreach ($custom_permissions as $key => $custom_permission)
+                                            <div class="col-sm-6 form-group">
+                                                <label>{{ ucwords($key) }}</label>
+                                                @foreach ($custom_permission as $permission)
+                                                    <div class="form-check">
+                                                        <div class="checkbox">
+                                                            <input type="checkbox" id="checkbox{{ $permission->id }}"
+                                                                class="form-check-input checkbox-permission"
+                                                                wire:model.live="checked_permissions"
+                                                                value="{{ $permission->name }}" disabled>
+                                                            <label
+                                                                for="checkbox{{ $permission->id }}">{{ $permission->name }}</label>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
                         @endif
 
                     </div>
