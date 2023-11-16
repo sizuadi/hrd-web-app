@@ -4,14 +4,15 @@ namespace App\Livewire\Pages\Roles;
 
 use App\Helpers\GlobalHelpers;
 use App\Livewire\Forms\Pages\Roles\RolesForm;
-use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 #[Layout('livewire.layouts.app')]
+#[Title('Role')]
 class RolesIndex extends Component
 {
 
@@ -71,6 +72,7 @@ class RolesIndex extends Component
 
     public function resetForm()
     {
+        $this->form->id = "";
         $this->form->name = "";
         $this->custom_permissions = [];
         $this->checked_permissions = [];
@@ -107,9 +109,7 @@ class RolesIndex extends Component
         $datas = Role::query();
 
         if ($this->search) {
-            $datas = $datas->where('full_name', 'LIKE', '%' . $this->search . '%')
-                ->orWhere('email', 'LIKE', '%' . $this->search . '%')
-                ->orWhere('rolename', 'LIKE', '%' . $this->search . '%');
+            $datas = $datas->where('full_name', 'LIKE', '%' . $this->search . '%');
         }
 
         if ($this->status != "") {

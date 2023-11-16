@@ -84,7 +84,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($datas as $key => $data)
+                                    @forelse ($datas as $key => $data)
                                         <tr>
                                             <td class="text-bold-500">{{ $datas->firstItem() + $key }}</td>
                                             <td class="text-bold-500">
@@ -107,7 +107,11 @@
                                             </td>
                                             <td class="text-bold-500">{{ $data->name }}</td>
                                         </tr>
-                                    @endforeach
+                                    @empty
+                                        <tr>
+                                            <td colspan="3">Data kosong</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>

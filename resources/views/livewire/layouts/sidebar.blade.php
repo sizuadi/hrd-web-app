@@ -71,7 +71,8 @@
 
                 </li>
 
-                <li class="sidebar-item  has-sub">
+                <li
+                    class="sidebar-item {{ Route::is('companies') || Route::is('work-types') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-collection-fill"></i>
                         <span>Proyek</span>
@@ -84,13 +85,13 @@
 
                         </li>
 
-                        <li class="submenu-item  ">
-                            <a href="extra-component-comment.html" class="submenu-link">Perusahaan</a>
+                        <li class="submenu-item {{ Route::is('companies') ? 'active' : '' }}">
+                            <a href="/companies" wire:navigate class="submenu-link">Perusahaan</a>
 
                         </li>
 
-                        <li class="submenu-item  ">
-                            <a href="extra-component-divider.html" class="submenu-link">Tipe Pekerjaan</a>
+                        <li class="submenu-item {{ Route::is('work-types') ? 'active' : '' }}">
+                            <a href="/work-types" wire:navigate class="submenu-link">Tipe Pekerjaan</a>
                         </li>
 
                     </ul>

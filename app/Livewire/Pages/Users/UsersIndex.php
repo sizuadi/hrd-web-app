@@ -8,11 +8,13 @@ use App\Models\User;
 use App\Models\UserStatus;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\Title;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Spatie\Permission\Models\Role;
 
 #[Layout('livewire.layouts.app')]
+#[Title('User')]
 class UsersIndex extends Component
 {
 
@@ -66,6 +68,7 @@ class UsersIndex extends Component
 
     public function resetForm()
     {
+        $this->form->id = "";
         $this->form->full_name = "";
         $this->form->username = "";
         $this->form->password = "";

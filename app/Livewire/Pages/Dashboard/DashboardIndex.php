@@ -5,8 +5,10 @@ namespace App\Livewire\Pages\Dashboard;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use App\Helpers\GlobalHelpers;
+use Livewire\Attributes\Title;
 
 #[Layout('livewire.layouts.app')]
+#[Title('Dashboard')]
 class DashboardIndex extends Component
 {
     public function mount()
