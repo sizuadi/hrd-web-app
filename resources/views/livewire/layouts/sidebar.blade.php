@@ -72,7 +72,7 @@
                 </li>
 
                 <li
-                    class="sidebar-item {{ Route::is('companies') || Route::is('work-types') ? 'active' : '' }} has-sub">
+                    class="sidebar-item {{ Route::is('companies') || Route::is('work-types') || Route::is('projects') ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-collection-fill"></i>
                         <span>Proyek</span>
@@ -80,8 +80,8 @@
 
                     <ul class="submenu ">
 
-                        <li class="submenu-item">
-                            <a href="extra-component-avatar.html" class="submenu-link">Proyek</a>
+                        <li class="submenu-item {{ Route::is('projects') ? 'active' : '' }}"">
+                            <a href="/projects" wire:navigate class="submenu-link">Proyek</a>
 
                         </li>
 

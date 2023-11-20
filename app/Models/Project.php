@@ -5,23 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Company extends Model
+class Project extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'company_id',
         'name',
+        'description',
+        'start_date',
+        'end_date',
         'status_id',
     ];
 
-    public function projects(): HasMany
+    public function company(): BelongsTo
     {
-        return $this->hasMany(Project::class, "company_id");
+        return $this->belongsTo(Company::class, "company_id");
     }
 
     public function status(): BelongsTo
     {
-        return $this->belongsTo(CompanyStatus::class, "status_id");
+        return $this->belongsTo(ProjectStatus::class, "status_id");
     }
 }
