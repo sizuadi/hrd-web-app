@@ -50,15 +50,15 @@ class RolesIndex extends Component
     public function changeModalMode($mode = "", $id = 0)
     {
         $this->mode = $mode;
-        if ($id != 0 && ($mode == "update" || $mode == "show")) {
-            \DB::statement("SET SQL_MODE=''");
-            $role_permission = Permission::select('name', 'id')->groupBy('name')->get();
-            foreach ($role_permission as $per) {
-                $key = substr($per->name, 0, strpos($per->name, "."));
-                if (str_starts_with($per->name, $key)) {
-                    $this->custom_permissions[$key][] = $per;
-                }
+        \DB::statement("SET SQL_MODE=''");
+        $role_permission = Permission::select('name', 'id')->groupBy('name')->get();
+        foreach ($role_permission as $per) {
+            $key = substr($per->name, 0, strpos($per->name, "."));
+            if (str_starts_with($per->name, $key)) {
+                $this->custom_permissions[$key][] = $per;
             }
+        }
+        if ($id != 0 && ($mode == "update" || $mode == "show")) {
             $role = Role::find($id);
             $this->checked_permissions = $role->getPermissionNames()->toArray();
             $this->checkedAll = count($this->checked_permissions) == count($role_permission);
@@ -109,7 +109,7 @@ class RolesIndex extends Component
         $datas = Role::query();
 
         if ($this->search) {
-            $datas = $datas->where('full_name', 'LIKE', '%' . $this->search . '%');
+            $datas = $datas->where('name', 'LIKE', '%' . $this->search . '%');
         }
 
         if ($this->status != "") {
