@@ -17,7 +17,8 @@
                             <div class="col-sm-6">
                                 <label for="name">Name</label>
                                 <input type="text" class="form-control @error('form.name') is-invalid @enderror"
-                                    id="name" wire:model="form.name" placeholder="Name">
+                                    id="name" wire:model="form.name" placeholder="Name"
+                                    @if ($mode == 'show') readonly @endif>
                                 @error('form.name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -28,7 +29,7 @@
                                 <label for="company_id">Perusahaan</label>
                                 <div class="form-group">
                                     <select class="choices form-select" id="company_id" wire:model="form.company_id"
-                                        wire:ignore>
+                                        wire:ignore @if ($mode == 'show') disabled @endif>
                                         <option value="">Select an option</option>
                                         @foreach ($companies as $key => $company)
                                             <option value="1" :key="{{ $key }}">
@@ -47,7 +48,8 @@
                             <div class="col-sm-12">
                                 <label for="description">Description</label>
                                 <textarea class="form-control @error('form.description') is-invalid @enderror" id="description"
-                                    wire:model="form.description" placeholder="Description" rows="2"></textarea>
+                                    wire:model="form.description" placeholder="Description" rows="2"
+                                    @if ($mode == 'show') readonly @endif></textarea>
                                 @error('form.description')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -59,8 +61,9 @@
                             <div class="col-sm-6">
                                 <label for="start_date">Start Date</label>
                                 <input type="text"
-                                    class="form-control @error('form.start_date') is-invalid @enderror" id="start_date"
-                                    wire:model="form.start_date" placeholder="Start Date">
+                                    class="form-control @error('form.start_date') is-invalid @enderror"
+                                    @if ($mode != 'show') id="start_date" @endif
+                                    wire:model="form.start_date" placeholder="Start Date" readonly>
                                 @error('form.start_date')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -70,7 +73,8 @@
                             <div class="col-sm-6">
                                 <label for="end_date">End Date</label>
                                 <input type="text" class="form-control @error('form.end_date') is-invalid @enderror"
-                                    id="end_date" wire:model="form.end_date" placeholder="End Date">
+                                    @if ($mode != 'show') id="end_date" @endif wire:model="form.end_date"
+                                    placeholder="End Date" readonly>
                                 @error('form.end_date')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -99,5 +103,28 @@
     </div>
 </div>
 
+
 @push('add-scripts')
+    <script type="module">
+        document.addEventListener('flatpickr', function() {
+            setTimeout(() => {
+                let startDatePicker = flatpickr("#start_date", {
+                    dateFormat: "Y-m-d",
+                    defaultDate: "today",
+                    allowInput: false,
+                    maxDate: document.getElementById("end_date").value,
+                    onClose: function(selectedDates, dateStr, instance) {
+                        endDatePicker.set('minDate', dateStr);
+                    },
+                });
+                let endDatePicker = flatpickr("#end_date", {
+                    dateFormat: "Y-m-d",
+                    minDate: document.getElementById("start_date").value,
+                    onClose: function(selectedDates, dateStr, instance) {
+                        startDatePicker.set('maxDate', dateStr);
+                    },
+                });
+            }, 100);
+        })
+    </script>
 @endpush

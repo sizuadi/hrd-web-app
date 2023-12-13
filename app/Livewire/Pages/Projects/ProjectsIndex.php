@@ -59,9 +59,7 @@ class ProjectsIndex extends Component
             $this->form->start_date = $project->start_date;
             $this->form->end_date = $project->end_date;
         }
-        if ($mode != "show") {
-            $this->dispatch("choices");
-        }
+        $this->dispatch("flatpickr");
     }
 
     public function resetForm()
