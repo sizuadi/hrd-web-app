@@ -22,5 +22,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/roles', App\Livewire\Pages\Roles\RolesIndex::class)->name('roles');
     Route::get('/companies', App\Livewire\Pages\Companies\CompaniesIndex::class)->name('companies');
     Route::get('/work-types', App\Livewire\Pages\WorkTypes\WorkTypesIndex::class)->name('work-types');
+    Route::get('/archive-categories', App\Livewire\Pages\ArchiveCategories\ArchiveCategoriesIndex::class)->name('archive-categories');
     Route::get('/projects', App\Livewire\Pages\Projects\ProjectsIndex::class)->name('projects');
 });

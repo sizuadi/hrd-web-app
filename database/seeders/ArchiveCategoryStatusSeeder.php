@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ProjectStatusSeeder extends Seeder
+class ArchiveCategoryStatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,7 @@ class ProjectStatusSeeder extends Seeder
             ["id" => 1, "name" => "Active"],
         ];
         foreach ($statuses as $status) {
-            DB::table("project_statuses")->updateOrInsert($status);
+            DB::table("archive_category_statuses")->updateOrInsert($status);
         }
     }
 }

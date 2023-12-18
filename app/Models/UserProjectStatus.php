@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ArchiveCategoryStatus extends Model
+class UserProjectStatus extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'id',
-        'name',
-    ];
 }

@@ -144,20 +144,6 @@
                         <span>Work Report</span>
                     </a>
                 </li>
-
-                <li class="sidebar-item">
-                    <a href="form-layout.html" class='sidebar-link'>
-                        <i class="bi bi-file-earmark-medical-fill"></i>
-                        <span>Arsip Masuk</span>
-                    </a>
-                </li>
-
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
-                        <i class="bi bi-journal-check"></i>
-                        <span>Arsip Keluar</span>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
