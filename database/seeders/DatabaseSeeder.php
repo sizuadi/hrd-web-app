@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             WorkTypeStatusSeeder::class,
             ProjectStatusSeeder::class,
+            UserProjectStatusSeeder::class,
+            ArchiveInStatusSeeder::class,
+            ArchiveOutStatusSeeder::class,
             LoginAdminSeeder::class,
         ]);
     }

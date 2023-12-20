@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_project_statuses', function (Blueprint $table) {
+        Schema::create('archive_in_statuses', function (Blueprint $table) {
             $table->integer("id")->primary();
             $table->string('name');
+            $table->timestamps();
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_project_statuses');
+        Schema::dropIfExists('archive_in_statuses');
     }
 };
