@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('archive_out_statuses', function (Blueprint $table) {
+        Schema::create('work_report_statuses', function (Blueprint $table) {
             $table->integer("id")->primary();
             $table->string('name');
         });
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('archive_out_statuses');
+        Schema::dropIfExists('work_report_statuses');
     }
 };

@@ -4,7 +4,7 @@
         <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ ucwords($mode) }} Proyek</h5>
+                    <h5 class="modal-title">{{ ucwords($mode) }} User Project</h5>
                     <button type="button" class="close rounded-pill" wire:click="resetForm" data-bs-dismiss="modal"
                         wire:ignore aria-label="Close">
                         <i data-feather="x"></i>
@@ -15,47 +15,58 @@
                         <input type="hidden" wire:model="form.id">
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control @error('form.name') is-invalid @enderror"
-                                    id="name" wire:model="form.name" placeholder="Name"
-                                    @if ($mode == 'show') readonly @endif>
-                                @error('form.name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="company_id">Perusahaan</label>
+                                <label for="project_id">Project</label>
                                 <div class="form-group">
-                                    <select class="choices form-select" id="company_id" wire:model="form.company_id"
-                                        @if ($mode == 'show') disabled @endif
-                                        wire:change="$set('form.company_id', $event.target.value)">
+                                    <select class="choices form-select"
+                                        @if ($mode == 'show') disabled @endif id="project_id"
+                                        wire:model.change="form.project_id"
+                                        wire:change="$set('form.project_id', $event.target.value)">
                                         <option value="">Select an option</option>
-                                        @foreach ($companies as $key => $company)
-                                            <option value="{{ $company->id }}" :key="{{ $key }}">
-                                                {{ $company->name }}</option>
+                                        @foreach ($projects as $key => $project)
+                                            <option value="{{ $project->id }}" :key="{{ $key }}">
+                                                {{ $project->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('form.company_id')
+                                    @error('form.project_id')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-sm-12">
-                                <label for="description">Description</label>
-                                <textarea class="form-control @error('form.description') is-invalid @enderror" id="description"
-                                    wire:model="form.description" placeholder="Description" rows="2"
-                                    @if ($mode == 'show') readonly @endif></textarea>
-                                @error('form.description')
+                            <div class="col-sm-6">
+                                <label for="company_id">Company</label>
+                                <input type="text"
+                                    class="form-control @error('form.company_id') is-invalid @enderror" id="company_id"
+                                    wire:model="form.company_name" placeholder="Company Name" readonly>
+                                <input type="hidden" wire:model="form.company_id">
+                                @error('form.company_id')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="col-sm-6">
+                                <label for="user_id">Pekerja</label>
+                                <div class="form-group">
+                                    <select class="choices form-select" id="user_id" wire:model="form.user_id"
+                                        @if ($mode == 'show') disabled @endif
+                                        wire:change="$set('form.user_id', $event.target.value)">
+                                        <option value="">Select an option</option>
+                                        @foreach ($users as $key => $user)
+                                            <option value="{{ $user->id }}" :key="{{ $key }}">
+                                                {{ $user->full_name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="@error('form.user_id') is-invalid @enderror"></div>
+                                    @error('form.user_id')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
                         <div class="row mt-4">

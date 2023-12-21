@@ -17,10 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger("user_id");
             $table->unsignedBigInteger("company_id");
             $table->unsignedBigInteger("work_type_id");
-            $table->longText("module");
-            $table->unsignedInteger("day");
-            $table->unsignedInteger("hour");
-            $table->unsignedInteger("total_hour");
             $table->timestamps();
         });
     }

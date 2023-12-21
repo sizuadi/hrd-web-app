@@ -20,5 +20,14 @@
          opacity: 0.5;
          filter: alpha(opacity=50);
      }
+
+     th,
+     td {
+         /*use this property to disbale soft wrap*/
+         white-space: nowrap;
+         /*To make extra certain,add this css property*/
+         word-break: keep-all;
+
+     }
  </style>
  @stack('add-styles')

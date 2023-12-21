@@ -3,13 +3,13 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Proyek</h3>
+                    <h3>Work Report</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="/" wire:navigate>Home</a></li>
-                            <li class="breadcrumb-item active">Proyek</li>
+                            <li class="breadcrumb-item active">Work Report</li>
                         </ol>
                     </nav>
                 </div>
@@ -75,20 +75,6 @@
                                         </th>
                                         <th></th>
                                         <th>
-                                            <div class="d-flex align-items-center @if ($orderColumn == 'name') text-primary @endif"
-                                                wire:click="sorting('name')" role="button">
-                                                <div>NAME</div>
-                                                @if ($orderColumn == 'name')
-                                                    <svg class="bi" width="1em" height="1em"
-                                                        fill="currentColor">
-                                                        <use
-                                                            xlink:href="{{ asset('assets/static/images/bootstrap-icons.svg#') . $sortIcon }}">
-                                                        </use>
-                                                    </svg>
-                                                @endif
-                                            </div>
-                                        </th>
-                                        <th>
                                             <div class="d-flex align-items-center @if ($orderColumn == 'companies.name') text-primary @endif"
                                                 wire:click="sorting('companies.name')" role="button">
                                                 <div>COMPANY NAME</div>
@@ -103,9 +89,37 @@
                                             </div>
                                         </th>
                                         <th>
+                                            <div class="d-flex align-items-center @if ($orderColumn == 'projects.name') text-primary @endif"
+                                                wire:click="sorting('projects.name')" role="button">
+                                                <div>PROJECT NAME</div>
+                                                @if ($orderColumn == 'projects.name')
+                                                    <svg class="bi" width="1em" height="1em"
+                                                        fill="currentColor">
+                                                        <use
+                                                            xlink:href="{{ asset('assets/static/images/bootstrap-icons.svg#') . $sortIcon }}">
+                                                        </use>
+                                                    </svg>
+                                                @endif
+                                            </div>
+                                        </th>
+                                        <th>
+                                            <div class="d-flex align-items-center @if ($orderColumn == 'users.name') text-primary @endif"
+                                                wire:click="sorting('users.name')" role="button">
+                                                <div>EMPLOYEE NAME</div>
+                                                @if ($orderColumn == 'users.name')
+                                                    <svg class="bi" width="1em" height="1em"
+                                                        fill="currentColor">
+                                                        <use
+                                                            xlink:href="{{ asset('assets/static/images/bootstrap-icons.svg#') . $sortIcon }}">
+                                                        </use>
+                                                    </svg>
+                                                @endif
+                                            </div>
+                                        </th>
+                                        <th>
                                             <div class="d-flex align-items-center @if ($orderColumn == 'start_date') text-primary @endif"
                                                 wire:click="sorting('start_date')" role="button">
-                                                <div>Start Date</div>
+                                                <div>START DATE</div>
                                                 @if ($orderColumn == 'start_date')
                                                     <svg class="bi" width="1em" height="1em"
                                                         fill="currentColor">
@@ -119,7 +133,7 @@
                                         <th>
                                             <div class="d-flex align-items-center @if ($orderColumn == 'end_date') text-primary @endif"
                                                 wire:click="sorting('end_date')" role="button">
-                                                <div>End Date</div>
+                                                <div>END DATE</div>
                                                 @if ($orderColumn == 'end_date')
                                                     <svg class="bi" width="1em" height="1em"
                                                         fill="currentColor">
@@ -153,6 +167,13 @@
                                                             <div></div>
                                                         </i>
                                                     </a>
+                                                    <a href="/work-reports/{{ $data->id }}" wire:navigate
+                                                        data-bs-toggle="modal" data-bs-target="#modal-form"
+                                                        class="btn icon btn-md btn-outline-info" title="detail">
+                                                        <i class="bi bi-list-check">
+                                                            <div></div>
+                                                        </i>
+                                                    </a>
                                                     <div class="dropdown d-inline-block">
                                                         <button type="button"
                                                             class="btn icon btn-md btn-outline-info"
@@ -175,8 +196,9 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="text-bold-500">{{ $data->name }}</td>
+                                            <td class="text-bold-500">{{ $data->project_name }}</td>
                                             <td class="text-bold-500">{{ $data->company_name }}</td>
+                                            <td class="text-bold-500">{{ $data->user_name }}</td>
                                             <td class="text-bold-500">{{ $data->start_date }}</td>
                                             <td class="text-bold-500">{{ $data->end_date }}</td>
                                             <td class="text-bold-500">
@@ -200,7 +222,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6" class="text-center">Data kosong</td>
+                                            <td colspan="8" class="text-center">Data kosong</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -214,6 +236,6 @@
             </div>
         </section>
     </div>
-    @include('livewire.pages.projects.partials.modal-form')
-    @include('livewire.pages.projects.partials.modal-change-status')
+    @include('livewire.pages.work-reports.partials.modal-form')
+    @include('livewire.pages.work-reports.partials.modal-change-status')
 </div>

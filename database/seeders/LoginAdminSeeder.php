@@ -16,7 +16,10 @@ class LoginAdminSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::create(
+        $user = User::updateOrCreate([
+                'full_name' => 'Administrator',
+                'email' => 'admin@atomic.id',
+            ],
             [
                 'full_name' => 'Administrator',
                 'email' => 'admin@atomic.id',

@@ -5,12 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ArchiveInStatus extends Model
+class WorkReportDetail extends Model
 {
     use HasFactory;
-
-    protected $fillable = [
-        'id',
-        'name',
-    ];
 }

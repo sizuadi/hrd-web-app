@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('archive_in_statuses', function (Blueprint $table) {
             $table->integer("id")->primary();
             $table->string('name');
-            $table->timestamps();
         });
     }
 

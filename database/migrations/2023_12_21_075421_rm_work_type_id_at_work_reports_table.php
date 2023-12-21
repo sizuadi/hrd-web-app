@@ -11,15 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_projects', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger("company_id");
-            $table->unsignedBigInteger("project_id");
-            $table->unsignedBigInteger("user_id");
+        Schema::table('work_reports', function (Blueprint $table) {
+            $table->dropColumn("work_type_id");
             $table->date("start_date");
             $table->date("end_date");
-            $table->integer("status_id")->default(1);
-            $table->timestamps();
         });
     }
 
@@ -28,6 +23,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_projects');
+        Schema::table('work_reports', function (Blueprint $table) {
+            $table->unsignedBigInteger("work_type_id");
+            $table->dropColumn("start_date");
+            $table->dropColumn("end_date");
+        });
     }
 };

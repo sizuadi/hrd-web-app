@@ -72,7 +72,7 @@
                 </li>
 
                 <li
-                    class="sidebar-item {{ Route::is('companies') || Route::is('work-types') || Route::is('projects') ? 'active' : '' }} has-sub">
+                    class="sidebar-item {{ (Route::is('companies') || Route::is('work-types') || Route::is('projects') ? 'active' : '' || Route::is('user-projects')) ? 'active' : '' }} has-sub">
                     <a href="#" class='sidebar-link'>
                         <i class="bi bi-collection-fill"></i>
                         <span>Proyek</span>
@@ -80,14 +80,16 @@
 
                     <ul class="submenu ">
 
-                        <li class="submenu-item {{ Route::is('projects') ? 'active' : '' }}"">
+                        <li class="submenu-item {{ Route::is('projects') ? 'active' : '' }}">
                             <a href="/projects" wire:navigate class="submenu-link">Proyek</a>
+                        </li>
 
+                        <li class="submenu-item {{ Route::is('user-projects') ? 'active' : '' }}">
+                            <a href="/user-projects" wire:navigate class="submenu-link">Proyek Pekerja</a>
                         </li>
 
                         <li class="submenu-item {{ Route::is('companies') ? 'active' : '' }}">
                             <a href="/companies" wire:navigate class="submenu-link">Perusahaan</a>
-
                         </li>
 
                         <li class="submenu-item {{ Route::is('work-types') ? 'active' : '' }}">
@@ -107,7 +109,7 @@
 
                     <ul class="submenu">
                         <li class="submenu-item  ">
-                            <a href="layout-default.html" class="submenu-link">Kategori</a>
+                            <a href="/archive-categories" wire:navigate class="submenu-link">Kategori</a>
                         </li>
                     </ul>
 
@@ -116,8 +118,8 @@
 
                 <li class="sidebar-title">Human Resources</li>
 
-                <li class="sidebar-item">
-                    <a href="#" class='sidebar-link'>
+                <li class="sidebar-item {{ Route::is('work-reports') ? 'active' : '' }}">
+                    <a href="/work-reports" wire:navigate class='sidebar-link'>
                         <i class="bi bi-hexagon-fill"></i>
                         <span>Work Report</span>
                     </a>

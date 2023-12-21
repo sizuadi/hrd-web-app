@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             UserProjectStatusSeeder::class,
             ArchiveInStatusSeeder::class,
             ArchiveOutStatusSeeder::class,
+            WorkReportStatusSeeder::class,
             LoginAdminSeeder::class,
         ]);
     }

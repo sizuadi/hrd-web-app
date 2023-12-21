@@ -7,6 +7,7 @@ use App\Livewire\Forms\Pages\Projects\ProjectsForm;
 use App\Models\Company;
 use App\Models\Project;
 use App\Models\ProjectStatus;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -58,6 +59,9 @@ class ProjectsIndex extends Component
             $this->form->description = $project->description;
             $this->form->start_date = $project->start_date;
             $this->form->end_date = $project->end_date;
+        }
+        if ($mode != "show") {
+            $this->dispatch("choices");
         }
         $this->dispatch("flatpickr");
     }
@@ -113,9 +117,18 @@ class ProjectsIndex extends Component
         $this->status_name = $status_name;
     }
 
+    public function updated()
+    {
+        $this->dispatch("choices");
+    }
+
     public function render()
     {
-        $datas = Project::query();
+        $datas = DB::table("projects")->selectRaw("projects.*,
+        companies.name as company_name, project_statuses.name as status_name")
+        ->join("companies", "projects.company_id", "companies.id")
+        ->join("project_statuses", "projects.status_id", "project_statuses.id");
+;
 
         if ($this->search) {
             $datas = $datas->where('name', 'LIKE', '%' . $this->search . '%');

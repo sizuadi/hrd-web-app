@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class UserProjectStatusSeeder extends Seeder
+class WorkReportStatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,11 +14,12 @@ class UserProjectStatusSeeder extends Seeder
     public function run(): void
     {
         $statuses = [
-            ["id" => 0, "name" => "Inactive"],
-            ["id" => 1, "name" => "Active"],
+            ["id" => 0, "name" => "Cancelled"],
+            ["id" => 1, "name" => "Input"],
+            ["id" => 2, "name" => "Confirm"],
         ];
         foreach ($statuses as $status) {
-            DB::table("user_project_statuses")->updateOrInsert($status);
+            DB::table("work_report_statuses")->updateOrInsert($status);
         }
     }
 }
