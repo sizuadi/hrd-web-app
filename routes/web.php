@@ -2,6 +2,7 @@
 
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +34,12 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('report')->group(function () {
         Route::get('/work-reports', App\Livewire\Pages\Report\WorkReports\WorkReportsIndex::class)->name('report.work-reports');
     });
+});
+
+Livewire::setUpdateRoute(function ($handle) {
+    return Route::post('/livewire/update', $handle);
+});
+
+Livewire::setScriptRoute(function ($handle) {
+    return Route::get('/livewire/livewire.js', $handle);
 });

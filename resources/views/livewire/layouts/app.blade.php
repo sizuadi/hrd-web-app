@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>HRD System - {{ $title ?? 'Atomic Indonesia' }}</title>
-    @livewireStyles
     @include('livewire.layouts.styles')
 </head>
 
@@ -29,7 +28,6 @@
         </div>
     </div>
     @include('livewire.layouts.scripts')
-    @livewireScriptConfig
 </body>
 
 </html>
