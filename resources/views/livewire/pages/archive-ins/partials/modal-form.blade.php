@@ -60,12 +60,11 @@
                                 @enderror
                             </div>
                             <div class="col-sm-6">
-                                <label for="addressed_to">Addressed To</label>
-                                <input type="text"
-                                    class="form-control @error('form.addressed_to') is-invalid @enderror"
-                                    id="addressed_to" wire:model="form.addressed_to"
-                                    @if ($mode == 'show') readonly @endif placeholder="Addressed To">
-                                @error('form.addressed_to')
+                                <label for="source">Source</label>
+                                <input type="text" class="form-control @error('form.source') is-invalid @enderror"
+                                    id="source" wire:model="form.source"
+                                    @if ($mode == 'show') readonly @endif placeholder="Source">
+                                @error('form.source')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
