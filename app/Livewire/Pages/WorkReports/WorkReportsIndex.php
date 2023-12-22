@@ -8,7 +8,7 @@ use App\Models\Company;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\WorkReport;
-use App\Models\WorkReportstatus;
+use App\Models\WorkReportStatus;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -158,7 +158,7 @@ class WorkReportsIndex extends Component
         }
 
         $datas = $datas->orderBy($this->orderColumn, $this->sortOrder)->paginate($this->paginate);
-        $statuses = WorkReportstatus::orderBy("id", "desc")->get();
+        $statuses = WorkReportStatus::orderBy("id", "desc")->get();
         $projects = DB::table("user_projects")->selectRaw(
             "user_projects.*, projects.name as project_name"
         )

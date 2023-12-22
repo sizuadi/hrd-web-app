@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             WorkTypeStatusSeeder::class,
             ProjectStatusSeeder::class,
             UserProjectStatusSeeder::class,
+            ArchiveCategoryStatusSeeder::class,
             ArchiveInStatusSeeder::class,
             ArchiveOutStatusSeeder::class,
             WorkReportStatusSeeder::class,
