@@ -8,8 +8,8 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/" wire:navigate>Home</a></li>
-                            <li class="breadcrumb-item active"><a href="/work-reports" wire:navigate>Work Report</a>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                            <li class="breadcrumb-item active"><a href="/work-reports">Work Report</a>
                             </li>
                             <li class="breadcrumb-item active">Detail</a>
                             </li>
@@ -68,46 +68,56 @@
                                 <th>Hours</th>
                                 <th>Delete</th>
                             </tr>
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" style="width: 200px;">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" style="width: 200px;">
-                                </td>
-                                <td>
-                                    <textarea name="" class="form-control" id="" rows="2" style="width: 200px;"></textarea>
-                                </td>
-                                <td>
-                                    <select name="" id="" class="form-control" style="width: 200px;">
-                                        <option value="1">Test</option>
-                                        <option value="1">Test</option>
-                                        <option value="1">Test</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" style="width: 200px;">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control" style="width: 200px;">
-                                </td>
-                                <td>
-                                    <button type="button" class="btn btn-icon btn-danger">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            @foreach ($work_report_details as $key => $detail)
+                                <tr>
+                                    <td>
+                                        {{ $key + 1 }}
+                                    </td>
+                                    <td>
+                                        <input type="text"
+                                            wire:model="work_report_details.{{ $key }}.module"
+                                            class="form-control" style="width: 200px;">
+                                    </td>
+                                    <td>
+                                        <input type="text" wire:model="work_report_details.{{ $key }}.link"
+                                            class="form-control" style="width: 200px;">
+                                    </td>
+                                    <td>
+                                        <textarea class="form-control" wire:model="work_report_details.{{ $key }}.description" rows="2"
+                                            style="width: 200px;"></textarea>
+                                    </td>
+                                    <td>
+                                        <select class="form-control"
+                                            wire:model="work_report_details.{{ $key }}.work_type_id"
+                                            style="width: 200px;">
+                                            @foreach ($work_types as $work_type)
+                                                <option value="{{ $work_type->id }}">{{ $work_type->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="number" wire:model="work_report_details.{{ $key }}.day"
+                                            class="form-control" style="width: 200px;">
+                                    </td>
+                                    <td>
+                                        <input type="number" wire:model="work_report_details.{{ $key }}.hour"
+                                            class="form-control" style="width: 200px;">
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-icon btn-danger"
+                                            wire:click="removeWorkReportDetail({{ $key }})">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
                     </div>
                     <div class="mt-3">
-                        <button class="btn btn-primary">Add +</button>
-                        <button class="btn btn-danger">Cancel</button>
+                        <button class="btn btn-primary" wire:click="addWorkReportDetail">Add +</button>
                     </div>
                     <div class="mt-3">
-                        <button class="btn btn-success">Update</button>
+                        <button class="btn btn-success" wire:click="update">Update</button>
                     </div>
                 </div>
             </div>

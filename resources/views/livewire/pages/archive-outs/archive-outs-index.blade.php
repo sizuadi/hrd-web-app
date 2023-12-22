@@ -3,13 +3,13 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Proyek</h3>
+                    <h3>Archive Out</h3>
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active">Proyek</li>
+                            <li class="breadcrumb-item active">Archive Out</li>
                         </ol>
                     </nav>
                 </div>
@@ -75,10 +75,10 @@
                                         </th>
                                         <th></th>
                                         <th>
-                                            <div class="d-flex align-items-center @if ($orderColumn == 'name') text-primary @endif"
-                                                wire:click="sorting('name')" role="button">
-                                                <div>NAME</div>
-                                                @if ($orderColumn == 'name')
+                                            <div class="d-flex align-items-center @if ($orderColumn == 'archive_number') text-primary @endif"
+                                                wire:click="sorting('archive_number')" role="button">
+                                                <div>ARCHIVE NUMBER</div>
+                                                @if ($orderColumn == 'archive_number')
                                                     <svg class="bi" width="1em" height="1em"
                                                         fill="currentColor">
                                                         <use
@@ -89,10 +89,10 @@
                                             </div>
                                         </th>
                                         <th>
-                                            <div class="d-flex align-items-center @if ($orderColumn == 'companies.name') text-primary @endif"
-                                                wire:click="sorting('companies.name')" role="button">
-                                                <div>COMPANY NAME</div>
-                                                @if ($orderColumn == 'companies.name')
+                                            <div class="d-flex align-items-center @if ($orderColumn == 'addressed_to') text-primary @endif"
+                                                wire:click="sorting('addressed_to')" role="button">
+                                                <div>ADDRESSED TO</div>
+                                                @if ($orderColumn == 'addressed_to')
                                                     <svg class="bi" width="1em" height="1em"
                                                         fill="currentColor">
                                                         <use
@@ -103,10 +103,10 @@
                                             </div>
                                         </th>
                                         <th>
-                                            <div class="d-flex align-items-center @if ($orderColumn == 'start_date') text-primary @endif"
-                                                wire:click="sorting('start_date')" role="button">
-                                                <div>Start Date</div>
-                                                @if ($orderColumn == 'start_date')
+                                            <div class="d-flex align-items-center @if ($orderColumn == 'date') text-primary @endif"
+                                                wire:click="sorting('date')" role="button">
+                                                <div>DATE</div>
+                                                @if ($orderColumn == 'date')
                                                     <svg class="bi" width="1em" height="1em"
                                                         fill="currentColor">
                                                         <use
@@ -117,10 +117,10 @@
                                             </div>
                                         </th>
                                         <th>
-                                            <div class="d-flex align-items-center @if ($orderColumn == 'end_date') text-primary @endif"
-                                                wire:click="sorting('end_date')" role="button">
-                                                <div>End Date</div>
-                                                @if ($orderColumn == 'end_date')
+                                            <div class="d-flex align-items-center @if ($orderColumn == 'archive_categories.name') text-primary @endif"
+                                                wire:click="sorting('archive_categories.name')" role="button">
+                                                <div>ARCHIVE CATEGORY</div>
+                                                @if ($orderColumn == 'archive_categories.name')
                                                     <svg class="bi" width="1em" height="1em"
                                                         fill="currentColor">
                                                         <use
@@ -175,10 +175,10 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td class="text-bold-500">{{ $data->name }}</td>
-                                            <td class="text-bold-500">{{ $data->company_name }}</td>
-                                            <td class="text-bold-500">{{ $data->start_date }}</td>
-                                            <td class="text-bold-500">{{ $data->end_date }}</td>
+                                            <td class="text-bold-500">{{ $data->archive_number }}</td>
+                                            <td class="text-bold-500">{{ $data->addressed_to }}</td>
+                                            <td class="text-bold-500">{{ $data->date }}</td>
+                                            <td class="text-bold-500">{{ $data->archive_categories_name }}</td>
                                             <td class="text-bold-500">
                                                 @php
                                                     $classStatus = '';
@@ -200,7 +200,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6" class="text-center">Data kosong</td>
+                                            <td colspan="7" class="text-center">Data kosong</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -214,6 +214,6 @@
             </div>
         </section>
     </div>
-    @include('livewire.pages.projects.partials.modal-form')
-    @include('livewire.pages.projects.partials.modal-change-status')
+    @include('livewire.pages.archive-ins.partials.modal-form')
+    @include('livewire.pages.archive-ins.partials.modal-change-status')
 </div>

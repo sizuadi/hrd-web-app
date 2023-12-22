@@ -144,10 +144,10 @@ class WorkReportsIndex extends Component
     {
         $datas = DB::table("work_reports")->selectRaw("work_reports.*,
         projects.name as project_name, companies.name as company_name, users.full_name as user_name, work_report_statuses.name as status_name")
-        ->join("projects", "work_reports.project_id", "projects.id")
-        ->join("companies", "work_reports.company_id", "companies.id")
-        ->join("users", "work_reports.user_id", "users.id")
-        ->join("work_report_statuses", "work_reports.status_id", "work_report_statuses.id");
+            ->join("projects", "work_reports.project_id", "projects.id")
+            ->join("companies", "work_reports.company_id", "companies.id")
+            ->join("users", "work_reports.user_id", "users.id")
+            ->join("work_report_statuses", "work_reports.status_id", "work_report_statuses.id");
 
         if ($this->search) {
             $datas = $datas->where('project_name', 'LIKE', '%' . $this->search . '%');
@@ -162,13 +162,9 @@ class WorkReportsIndex extends Component
         $projects = DB::table("user_projects")->selectRaw(
             "user_projects.*, projects.name as project_name"
         )
-        ->join("projects", "user_projects.project_id", "projects.id")
-        ->where("user_id", auth()->user()->id)
-        ->get();
-
-        if(count($this->getErrorBag()->all()) > 0){
-             $this->dispatch("choices");
-        }
+            ->join("projects", "user_projects.project_id", "projects.id")
+            ->where("user_id", auth()->user()->id)
+            ->get();
         return view('livewire.pages.work-reports.work-reports-index', [
             'datas' => $datas,
             'statuses' => $statuses,

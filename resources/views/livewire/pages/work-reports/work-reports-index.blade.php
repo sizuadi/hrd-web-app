@@ -8,7 +8,7 @@
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/" wire:navigate>Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
                             <li class="breadcrumb-item active">Work Report</li>
                         </ol>
                     </nav>
@@ -167,8 +167,7 @@
                                                             <div></div>
                                                         </i>
                                                     </a>
-                                                    <a href="/work-reports/{{ $data->id }}" wire:navigate
-                                                        data-bs-toggle="modal" data-bs-target="#modal-form"
+                                                    <a href="{{ route('work-reports.detail', $data->id) }}"
                                                         class="btn icon btn-md btn-outline-info" title="detail">
                                                         <i class="bi bi-list-check">
                                                             <div></div>

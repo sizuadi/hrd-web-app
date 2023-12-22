@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,5 +27,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/projects', App\Livewire\Pages\Projects\ProjectsIndex::class)->name('projects');
     Route::get('/user-projects', App\Livewire\Pages\UserProjects\UserProjectsIndex::class)->name('user-projects');
     Route::get('/work-reports', App\Livewire\Pages\WorkReports\WorkReportsIndex::class)->name('work-reports');
-    Route::get('/work-reports/{id}', App\Livewire\Pages\WorkReports\WorkReportsDetail::class)->name('work-reports');
+    Route::get('/work-reports/{id}', App\Livewire\Pages\WorkReports\WorkReportsDetail::class)->name('work-reports.detail');
+    Route::get('/archive-ins', App\Livewire\Pages\ArchiveIns\ArchiveInsIndex::class)->name('archive-ins');
+    Route::get('/archive-outs', App\Livewire\Pages\ArchiveOuts\ArchiveOutsIndex::class)->name('archive-outs');
+    Route::prefix('report')->group(function () {
+        Route::get('/work-reports', App\Livewire\Pages\Report\WorkReports\WorkReportsIndex::class)->name('report.work-reports');
+    });
 });

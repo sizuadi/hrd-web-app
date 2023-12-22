@@ -4,77 +4,95 @@ namespace App\Livewire\Pages\WorkReports;
 
 use App\Helpers\GlobalHelpers;
 use App\Livewire\Forms\Pages\WorkReports\WorkReportsForm;
-use App\Models\Company;
-use App\Models\User;
 use App\Models\WorkReport;
-use App\Models\WorkReportstatus;
+use App\Models\WorkReportDetail;
+use App\Models\WorkType;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 #[Layout('livewire.layouts.app')]
 #[Title('Work Report')]
 class WorkReportsDetail extends Component
 {
     // for create
-    public WorkReportsForm $form;
-
     public $work_report;
+    public $work_types;
     public $work_report_details = [];
 
     public function mount($id)
     {
         $this->work_report = DB::table("work_reports")->selectRaw("work_reports.*,
         projects.name as project_name, companies.name as company_name, users.full_name as user_name, work_report_statuses.name as status_name")
-        ->join("projects", "work_reports.project_id", "projects.id")
-        ->join("companies", "work_reports.company_id", "companies.id")
-        ->join("users", "work_reports.user_id", "users.id")
-        ->join("work_report_statuses", "work_reports.status_id", "work_report_statuses.id")
-        ->where("work_reports.id", $id)
-        ->first();
+            ->join("projects", "work_reports.project_id", "projects.id")
+            ->join("companies", "work_reports.company_id", "companies.id")
+            ->join("users", "work_reports.user_id", "users.id")
+            ->join("work_report_statuses", "work_reports.status_id", "work_report_statuses.id")
+            ->where("work_reports.id", $id)
+            ->first();
+
+        $this->work_report_details = WorkReportDetail::where("work_report_id", $this->work_report->id)->get()->toArray();
+        foreach ($this->work_report_details as $key => $detail) {
+            $module = json_decode($detail['module']);
+            $this->work_report_details[$key]['module'] = $module->module;
+            $this->work_report_details[$key]['link'] = $module->link;
+            $this->work_report_details[$key]['description'] = $module->description;
+        }
+
+        $this->work_types = WorkType::where("status_id", 1)->get();
     }
 
-    public function resetForm()
+    public function addWorkReportDetail()
     {
-        $this->form->id = "";
-        $this->form->company_id = 0;
-        $this->form->company_name = "";
-        $this->form->user_id = 0;
-        $this->form->user_name = "";
-        $this->form->project_id = 0;
-        $this->form->user_id = 0;
-        $this->form->start_date = "";
-        $this->form->end_date = "";
+        $this->work_report_details[] = [];
+    }
+
+    public function removeWorkReportDetail($index)
+    {
+        unset($this->work_report_details[$index]);
+        $this->work_report_details = array_values($this->work_report_details);
     }
 
     public function store()
     {
-        $this->validate();
-        WorkReport::create((array)$this->form);
+        WorkReportDetail::create((array)$this->form);
 
         $toastify = GlobalHelpers::toastifySuccess("Data Berhasil Dibuat");
         $this->dispatch(...$toastify);
-        $this->dispatch("closeModal");
-        $this->resetForm();
     }
 
     public function update()
     {
-        $this->validate();
-        $work_report = WorkReport::find($this->form->id);
-        $work_report->update((array)$this->form);
+        WorkReportDetail::where("work_report_id", $this->work_report->id)->delete();
+        foreach ($this->work_report_details as $detail) {
+            $module = [
+                'module' => isset($detail['module']) ? $detail['module'] : "",
+                'link' => isset($detail['link']) ? $detail['link'] : "",
+                'description' => isset($detail['description']) ? $detail['description'] : "",
+            ];
+            $module = json_encode($module);
+            $day = isset($detail['day']) && $detail['day'] != "" ? $detail['day'] : 0;
+            $hour = isset($detail['hour']) && $detail['hour'] != "" ? $detail['hour'] : 0;
+            $total_hour = (24 * $day) + $hour;
+            WorkReportDetail::create(
+                [
+                    'work_report_id' => $this->work_report->id,
+                    'work_type_id' => $detail['work_type_id'],
+                    'module' => $module,
+                    'day' => $day,
+                    'hour' => $hour,
+                    'total_hour' => $total_hour
+                ]
+            );
+        }
 
         $toastify = GlobalHelpers::toastifySuccess("Data Berhasil Diupdate");
         $this->dispatch(...$toastify);
-        $this->dispatch("closeModal");
-        $this->resetForm();
     }
 
     public function render()
     {
-
         return view('livewire.pages.work-reports.work-reports-detail');
     }
 

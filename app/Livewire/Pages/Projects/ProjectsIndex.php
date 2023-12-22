@@ -126,9 +126,8 @@ class ProjectsIndex extends Component
     {
         $datas = DB::table("projects")->selectRaw("projects.*,
         companies.name as company_name, project_statuses.name as status_name")
-        ->join("companies", "projects.company_id", "companies.id")
-        ->join("project_statuses", "projects.status_id", "project_statuses.id");
-;
+            ->join("companies", "projects.company_id", "companies.id")
+            ->join("project_statuses", "projects.status_id", "project_statuses.id");;
 
         if ($this->search) {
             $datas = $datas->where('name', 'LIKE', '%' . $this->search . '%');

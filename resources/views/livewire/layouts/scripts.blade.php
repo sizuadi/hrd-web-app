@@ -4,7 +4,7 @@
  <script src="{{ asset('assets/extensions/toastify-js/src/toastify.js') }}"></script>
  <script src="{{ asset('assets/extensions/choices.js/public/assets/scripts/choices.js') }}"></script>
  <script>
-     window.addEventListener('toastify', event => {
+     let toastifyFunction = () => {
          let data = event.detail[0];
          Toastify({
              text: data.text,
@@ -15,10 +15,12 @@
              backgroundColor: data.color,
              avatar: data.avatar,
          }).showToast();
-     });
+     }
+
+     window.addEventListener('toastify', toastifyFunction);
 
 
-     window.addEventListener('choices', event => {
+     let choicesFunction = () => {
          setTimeout(() => {
              let choices = document.querySelectorAll(".choices");
              let initChoice;
@@ -35,8 +37,8 @@
                  }
              }
          }, 500);
-     });
-
+     }
+     window.addEventListener('choices', choicesFunction);
 
      window.addEventListener('closeModal', event => {
          const modalElements = document.getElementsByClassName('modal');
