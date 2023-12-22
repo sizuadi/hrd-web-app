@@ -29,7 +29,7 @@
         </div>
     </div>
     @include('livewire.layouts.scripts')
-    @livewireScripts
+    @livewireScriptConfig
 </body>
 
 </html>
