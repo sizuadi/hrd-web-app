@@ -8,7 +8,7 @@ use App\Models\Company;
 use App\Models\Project;
 use App\Models\User;
 use App\Models\UserProject;
-use App\Models\UserProjectstatus;
+use App\Models\UserProjectStatus;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\Title;
@@ -154,7 +154,7 @@ class UserProjectsIndex extends Component
         }
 
         $datas = $datas->orderBy($this->orderColumn, $this->sortOrder)->paginate($this->paginate);
-        $statuses = UserProjectstatus::orderBy("id", "desc")->get();
+        $statuses = UserProjectStatus::orderBy("id", "desc")->get();
         $projects = Project::where("status_id", 1)->get();
         $users = User::where("status_id", 1)->get();
 

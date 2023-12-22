@@ -6,7 +6,7 @@ use App\Helpers\GlobalHelpers;
 use App\Livewire\Forms\Pages\ArchiveOuts\ArchiveOutsForm;
 use App\Models\ArchiveCategory;
 use App\Models\ArchiveOut;
-use App\Models\ArchiveOutstatus;
+use App\Models\ArchiveOutStatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
@@ -153,7 +153,7 @@ class ArchiveOutsIndex extends Component
         }
 
         $datas = $datas->orderBy($this->orderColumn, $this->sortOrder)->paginate($this->paginate);
-        $statuses = ArchiveOutstatus::orderBy("id", "desc")->get();
+        $statuses = ArchiveOutStatus::orderBy("id", "desc")->get();
         $archive_categories = ArchiveCategory::where("status_id", 1)->get();
 
         if (count($this->getErrorBag()->all()) > 0) {

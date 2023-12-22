@@ -6,7 +6,7 @@ use App\Helpers\GlobalHelpers;
 use App\Livewire\Forms\Pages\ArchiveIns\ArchiveInsForm;
 use App\Models\ArchiveCategory;
 use App\Models\ArchiveIn;
-use App\Models\ArchiveInstatus;
+use App\Models\ArchiveInStatus;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Attributes\Layout;
@@ -153,7 +153,7 @@ class ArchiveInsIndex extends Component
         }
 
         $datas = $datas->orderBy($this->orderColumn, $this->sortOrder)->paginate($this->paginate);
-        $statuses = ArchiveInstatus::orderBy("id", "desc")->get();
+        $statuses = ArchiveInStatus::orderBy("id", "desc")->get();
         $archive_categories = ArchiveCategory::where("status_id", 1)->get();
 
         if (count($this->getErrorBag()->all()) > 0) {
