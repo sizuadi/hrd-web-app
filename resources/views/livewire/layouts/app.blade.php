@@ -7,7 +7,6 @@
 
     <title>HRD System - {{ $title ?? 'Atomic Indonesia' }}</title>
     @livewireStyles
-    @vite(['resources/js/app.js'])
     @include('livewire.layouts.styles')
 </head>
 
